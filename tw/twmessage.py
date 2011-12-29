@@ -1,6 +1,6 @@
 #import twitter
 from tw import dm
-import tweepy 
+import tweepy
 #import dm
 from configobj import ConfigObj
 
@@ -27,7 +27,7 @@ def PostMessage(jdate, fromcity, tocity, message):
     data += fromcity
     data += " "
     data += tocity
-    
+    data += " |"
     i = 1
     for w in message:
         
@@ -69,7 +69,7 @@ def read_messages():
 # If the authentication was successful, you should
 # see the name of the account print out
     
-    print api.me().name
+    #print api.me().name
     msgobj_list = []
     msgs =  api.direct_messages()
     for m in msgs:

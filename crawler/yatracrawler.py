@@ -41,6 +41,8 @@ def parsetable(table, flightname, flightduration, flighttime, flightfare):
     #print table
     i = 0
     rows = re.split("ActualAmt_", table)
+    #print rows[0]
+    #print rows[1]
     for r in rows:
         #print r
         if ( i == 0):
@@ -80,9 +82,12 @@ def getpage(finallist, journeydate, fromcity, tocity):
         if (i > 0 and i < 6):
             parsetable(t, flightname, flightduration, flighttime, flightfare)
         i = i + 1
+        if (i > 6):
+            break
     
     j = 0 
-    for j in range(len(flighttime)):
+    flen = min(len(flighttime), len(flightfare), len(flightduration), len(flightname))
+    for j in range(flen):
         finallist.append(flightname[j].rstrip())
         finallist.append(flighttime[j].rstrip())
         finallist.append(flightduration[j].rstrip())

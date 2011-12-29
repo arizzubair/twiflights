@@ -10,8 +10,10 @@ def main():
     dmlist = twmessage.read_messages()
     
     dm = dmlist[0]
-    print dm
+    #print dm
     req = dm.text
+    dmid = dm.sender
+    
         
     query = req.split() 
     
