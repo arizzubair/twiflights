@@ -6,15 +6,21 @@ import datetime
 from tw import twmessage
 from tw import dm
 
+import re
+
 def main():
     dmlist = twmessage.read_messages()
     
     dm = dmlist[0]
     #print dm
     req = dm.text
-    dmid = dm.sender
-    
-        
+    dmsid = dm.sender
+    dmmid = dm.id
+    """ 
+    if (statdb.storedmdata(dmmid, dmsid, dm.split()[0])):
+        #skip 
+        print "hello"
+   """     
     query = req.split() 
     
     i = 1
@@ -31,7 +37,10 @@ def main():
     yr =  qdate.year
     mo =  qdate.month
     da = qdate.day
-
+    
+    if re.match("[0-9]", fromcity) or re.match("[0-9]", tocity) or re.match("[A-Za-z]", journeydate):
+        print "invalid input "+dm.text
+        exit(0)
      
     querydate = ""
     querydate += str(da) + "/" + str(mo) + "/" + str(yr) 
