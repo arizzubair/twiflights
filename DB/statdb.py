@@ -2,25 +2,35 @@ from tw import twmessage
 
 from pymongo import Connection
 
-def storedmdata(mid, sid, jdate):
+def readdmdata():
+    connection = Connection()
+    db = connection.test_database
+    dms = db.dmlist
+    
+    msg = dms.find_one()        
+    return msg['mid']
+    
+    
+
+def storedmdata(mid, sid, text):
     connection = Connection()
     db = connection.test_database
     dms = db.dmlist
     dm = {}
     pkey = ""
-    pkey += mid
-    pkey += sid
-    pkey += jdate
+    pkey += str(mid)
+    pkey += str(sid)
+    pkey += text
     
     for dm in dms.find({"id": pkey}):        
-        print dm
+        #print dm
         return 1
 
         
     dm = {"id":pkey,
             "mid": mid,
             "sid": sid,
-            "jdate": jdate 
+            "text": text 
             }
     dms.insert(dm)
     return 0
@@ -29,6 +39,7 @@ def storedmdata(mid, sid, jdate):
     
 def storeflightdata(querydate, journyedate, tocity, fromcity, flightlist):
     flag = 0
+    rflag = 0
     connection = Connection()
     db = connection.test_database
     collection = db.test_collection
@@ -67,6 +78,8 @@ def storeflightdata(querydate, journyedate, tocity, fromcity, flightlist):
                 "duration" : flightlist[2] 
                 }
         posts.insert(post)
+        rflag = 1
+    return rflag
         
         
     #for post in posts.find():

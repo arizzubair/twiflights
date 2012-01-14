@@ -47,7 +47,7 @@ def PostMessage(jdate, fromcity, tocity, message):
         
     print data
     status = api.update_status(data[:138]+"..")
-    print status
+    #print status
 
         
 def read_messages():   
