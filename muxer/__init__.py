@@ -64,7 +64,8 @@ def main():
         dbret = statdb.storeflightdata(querydate, journeydate, tocity, fromcity, finallist)
         
         if dbret == 1:
-            twmessage.PostMessage(journeydate, fromcity, tocity, finallist)
+            #twmessage.PostMessage(journeydate, fromcity, tocity, finallist)
+            print journeydate
         else:
             print "already published!!"
     
